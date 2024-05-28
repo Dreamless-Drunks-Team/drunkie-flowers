@@ -1,0 +1,39 @@
+.bouquet-item {
+    width: 300px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* тінь */
+
+    img {
+      width: 100%; /* Приведення зображення до 100% ширини батьківського контейнера */
+      border-radius: 8px; /* Закруглені кути */
+      object-fit: cover; /* Заповнення зображення в контейнері без спотворення */
+      height: 200px; /* Задаємо фіксовану висоту для квадратної форми */
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
