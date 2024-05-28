@@ -38,11 +38,11 @@ const Catalog = ({ bouquetList }) => {
         </div>
       </div>
       <div className="bouquet-list">
-        {bouquetList.map((image, index) => (
+        {bouquetList.map((bouquet, index) => (
           <BouquetItem
             key={index}
-            image={image}
-            name="Назва букету"
+            image={bouquet.thumbnail_url}
+            name={bouquet.name}
             price={50} // Повинні бути реальні дані ціни
           />
         ))}

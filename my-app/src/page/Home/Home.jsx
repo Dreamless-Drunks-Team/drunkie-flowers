@@ -6,11 +6,11 @@ const Home = ({ bouquetList }) => {
     <div className="catalog-container">
       <h2>Актуальні пропозиції:</h2>
       <div className="bouquet-list">
-        {bouquetList.map((image, index) => (
+        {bouquetList.map((bouquet, index) => (
           <BouquetItem
             key={index}
-            image={image}
-            name="Назва букету"
+            image={bouquet.thumbnail_url}
+            name={bouquet.name}
             price={50} // Повинні бути реальні дані ціни
           />
         ))}
