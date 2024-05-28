@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import "./Registration.scss";
+import "./RegistrationForm.scss";
 import { Navigate } from "react-router-dom";
 
-const Registration = () => {
+const RegistrationForm = () => {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -22,15 +21,15 @@ const Registration = () => {
             return;
         }
 
-        axios
-            .post("http://localhost:8080/api/register", {
-                name: name,
-                surname: surname,
-                email: email,
-                password: password,
-            })
-            .then(() => setRedirectToHome(true))
-            .catch((err) => console.error(err));
+        // axios
+        //     .post("http://localhost:8080/api/register", {
+        //         name: name,
+        //         surname: surname,
+        //         email: email,
+        //         password: password,
+        //     })
+        //     .then(() => setRedirectToHome(true))
+        //     .catch((err) => console.error(err));
     };
 
     if (redirectToHome) {
@@ -114,4 +113,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default RegistrationForm;
