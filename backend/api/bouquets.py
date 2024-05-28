@@ -15,10 +15,8 @@ bouquets = Blueprint('bouquets', __name__)
 
 @bouquets.route('/')
 def get_items():
-    filters: Filter = json.load(request.args.get("filters"))
+    print(request.args.to_dict())    
     
-    # Retrieve and return list of bouquets
-    pass
 
 @bouquets.route('/<int:id>')
 def get_item(id: int):

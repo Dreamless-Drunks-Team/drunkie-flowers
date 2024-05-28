@@ -5,11 +5,11 @@ from orm.price_policy_entity import PricePolicyEntity
 
 
 @dataclass
-class DeliveryOption(PricePolicyEntity):
-    __tablename__ = "delivery_option"
+class Decoration(PricePolicyEntity):
+    __tablename__ = "decoration"
     id: Mapped[int] = mapped_column(ForeignKey("price_policy_entity.id"), primary_key=True)
     description: Mapped[str] = mapped_column()
 
     __mapper_args__ = {
-        'polymorphic_identity': 'delivery_option',
+        'polymorphic_identity': 'decoration',
     }
