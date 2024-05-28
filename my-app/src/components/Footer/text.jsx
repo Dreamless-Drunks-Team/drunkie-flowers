@@ -1,17 +1,4 @@
-const Fol => { (<div className="div-2">
 
-<div className="div-8">
-  
-</div>
-</div>
-<div className="div-9">
-<div className="div-10">
-  <div className="column">
-    <div className="div-11">
-      <div className="div-12">Contact Us</div>
-      <div className="div-13">
-        <div className="div-14">
-          <div className="div-15">
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/a157bc21e07f347fe1811a6207c6741dd96b0afc692d73699757b80fa8632efc?apiKey=1d051b827e0147fdaf260280189c7fab&"
