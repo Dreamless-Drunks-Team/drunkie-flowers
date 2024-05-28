@@ -20,12 +20,14 @@ function Header() {
         </div>
         <nav className="navbar">
             <ul>
-                <li><NavLink to="/"> Home </NavLink></li>
-                <li><NavLink to="/catalog"> Catalog </NavLink></li>
-                <li><NavLink to="/cart"> Cart </NavLink></li>
+                <li><NavLink to="/"> Головна </NavLink></li>
+                <li><NavLink to="/catalog"> Каталог </NavLink></li>
+                <li><NavLink to="/custom_bouquest"> Склади Букет </NavLink></li>
+                <li><NavLink to="/special_offers"> Спецпропозиції </NavLink></li>
+                <li><NavLink to="/cart"> Корзина </NavLink></li>
             </ul>
         </nav>
-        <NavLink className="login-button" to="/login"> Log in </NavLink>
+        <NavLink className="login-button" to="/login"> Увійти </NavLink>
       </header>
   );
 }

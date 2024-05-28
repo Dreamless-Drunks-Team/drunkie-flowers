@@ -5,6 +5,7 @@ import LoginForm from "./page/Login/LoginForm";
 import RegistrationForm from "./page/Registration/RegistrationForm";
 import Home from "./page/Home/Home"
 import UserProfile from "./page/UserAccount/UserProfile";
+import Catalog from "./page/Catalog/Catalog";
 
 const user = {
   firstName: "Pavlo",
@@ -52,20 +53,23 @@ const user = {
   ],
 }
 
-function App() { 
-  return ( 
-    <BrowserRouter> 
-      <Header /> 
-      <Routes> 
-        <Route path="/" element={<Home bouquetList={bouquetList.slice(0, 5)}/>} /> 
-        <Route path="/login" element={<LoginForm />} /> 
-        <Route path="/register" element={<RegistrationForm />} /> 
-        <Route path="/profile" element={<UserProfile user={user} />} /> 
-        <Route path="/catalog" element={<Catalog bouquetList={bouquetList}/>} /> 
-      </Routes> 
-      <Footer /> 
-    </BrowserRouter> 
-  ); 
+const images = require.context('./assert/flower/', true);
+const bouquetList = images.keys().map(image => images(image));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home bouquetList={bouquetList.slice(0, 5)}/>} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegistrationForm />} />
+        <Route path="/profile" element={<UserProfile user={user} />} />
+        <Route path="/catalog" element={<Catalog bouquetList={bouquetList}/>} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
 export default App;
