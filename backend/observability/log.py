@@ -1,4 +1,4 @@
-from logging import Logger
+from observability.loggers.logger import Logger
 
 
 class Log:

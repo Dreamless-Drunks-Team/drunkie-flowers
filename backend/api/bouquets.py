@@ -4,6 +4,7 @@ from typing import List
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from auth.manager import TokenPayload
+from price_estimation.estimator import PriceEstimator
 from orm.user import User
 from orm.decoration import Decoration
 from orm.delivery_option import DeliveryOption

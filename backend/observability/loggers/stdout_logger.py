@@ -1,13 +1,11 @@
-from logging import Logger
-
-from observability.loggers.logger import LEVEL_SELECTION_MAP, LogLevel
+from observability.loggers.logger import Logger, LEVEL_SELECTION_MAP
 
 
 class StdoutLogger(Logger):
     def __init__(self):
-        self.level = LogLevel.INFO
+        self.level = 1
 
-    def set_level(self, level: LogLevel):
+    def set_level(self, level: int):
         self.level = level
 
     def log(self, message: str, level: int):
