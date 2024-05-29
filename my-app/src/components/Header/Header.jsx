@@ -22,7 +22,7 @@ function Header() {
             <ul>
                 <li><NavLink to="/"> Головна </NavLink></li>
                 <li><NavLink to="/catalog"> Каталог </NavLink></li>
-                <li><NavLink to="/custom_bouquest"> Склади Букет </NavLink></li>
+                <li><NavLink to="/custom_bouquets"> Склади Букет </NavLink></li>
                 <li><NavLink to="/special_offers"> Спецпропозиції </NavLink></li>
                 <li><NavLink to="/cart"> Корзина </NavLink></li>
             </ul>

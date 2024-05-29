@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import "./BouquetBuilder.scss"
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../storage/slice';
+import axios from "axios";
 
 const BouquetBuilder = () => {
-  const [packaging, setPackaging] = useState('box');
   const [flower, setFlower] = useState('')
   const [numberOfFlowers, setNumberOfFlowers] = useState(1);
   const [bouquet, setBouquet] = useState([]);
   const [inclideTape, setInclideTape] = useState(false)
   const [colorTape, setColorTape] = useState('#032320')
-  const [typeDelivery, setTypeDelivery] = useState('salon')
+  const [flowers, setFlowers] = useState([]);
 
   const handleAddFlower = (e) => {
     setBouquet(prevBouquet => [...prevBouquet, { flower, numberOfFlowers }])
@@ -24,19 +26,33 @@ const BouquetBuilder = () => {
     }
   }
 
+  const generateUniqueId = () => {
+    return Date.now() + Math.floor(Math.random() * 1000);
+  };
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    axios 
+        .get("http://localhost:5000/bouquets/flowers") 
+        .then((res) => {console.log(res.data); setFlowers(res.data) }) 
+        .catch((err) => console.error(err));
+  }, []);
+
+
   return (
     <div className='BouquetBuilder'>
       <h1>Створення власного букету</h1>
 
-      <h2>Спосіб упакування</h2>
-      <select value={packaging} onChange={(e) => setPackaging(e.target.value)}>
-        <option value="box">Коробка</option>
-        <option value="color_paper">Кольоровий папір</option>
-        <option value="paper">Прозорий папір</option>
-      </select>
-
       <h2>Вибір квітів та їх кількості</h2>
-      <input type="text" placeholder="Введіть назву квітки" onChange={e => setFlower(e.target.value)} />
+      <select onChange={e => setFlower(e.target.value)} value={flower}>
+          <option value="" disabled>Виберіть квітку</option>
+          {flowers.map((flowerName, index) => (
+              <option key={index} value={flowerName}>
+                  {flowerName}
+              </option>
+          ))}
+      </select>
       <input type="number" placeholder="Введіть кількість квіток" onChange={e => setNumberOfFlowers(e.target.value)} />
       <button onClick={handleAddFlower}>Додати квітку</button>
       <div className="bouquet-list">
@@ -51,13 +67,14 @@ const BouquetBuilder = () => {
       <h2>Додавання кольорових стрічок</h2>
       <input type="checkbox" checked={inclideTape} onChange={(e) => { setInclideTape(e.target.checked); console.log(e.target.value) }} />
       <input type="color" value={colorTape} onChange={(e) => setColorTape(e.target.value)} />
-
-      <h2>Спосіб доставки</h2>
-      <select value={typeDelivery} onChange={(e) => setTypeDelivery(e.target.value)}>
-        <option value="pickup">Самовивіз</option>
-        <option value="salon">Салон</option>
-        <option value="post_delivery">Пошта</option>
-      </select>
+      <button onClick={() => dispatch(addToCart(
+          {
+            id: generateUniqueId(),
+            name: "Custom bouquet",
+            price: 1000,
+            thumbnail_url: "http://localhost:5000/files/flower/bouquet_21.jpg"
+          }
+        ))}>Оформити замовлення</button>
     </div>
   );
 };

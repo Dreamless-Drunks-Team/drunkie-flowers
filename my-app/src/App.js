@@ -76,7 +76,7 @@ function App() {
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/profile" element={<UserProfile user={user} />} />
         <Route path="/catalog" element={<Catalog bouquetList={bouquets}/>} />
-        <Route path="/custom_bouquest" element={<BouquetBuilder/>}/>
+        <Route path="/custom_bouquets" element={<BouquetBuilder/>}/>
         <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
