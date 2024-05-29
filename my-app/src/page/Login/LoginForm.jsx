@@ -20,13 +20,12 @@ const LoginForm = () => {
         e.preventDefault();
 
         axios
-            .post("http://localhost:5000/login", {
+            .post("http://localhost:5000/user/login", {
                 email: email,
                 password: password,
             })
             .then((res) => {
-                console.log(res.data);
-                updateToken(res.data.token);
+                updateToken(res.data.refresh_token);
                 setRedirectToHome(true);
             })
             .catch((err) => console.error(err));

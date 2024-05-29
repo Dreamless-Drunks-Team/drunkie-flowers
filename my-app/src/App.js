@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     axios
-        .get("http://localhost:5000/bouquets/")
+        .get("http://localhost:5000/bouquets")
         .then((res) => {console.log(res.data); setBouquets(res.data) })
         .catch((err) => console.error(err));
   }, []);
