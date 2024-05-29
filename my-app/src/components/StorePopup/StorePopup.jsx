@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import './StorePopup.scss';
 
 const StorePopup = ({ show, onClose, onSubmit }) => {
-  const [store, setStore] = useState('');
   const [delivery, setDelivery] = useState('');
   const [packaging, setPackaging] = useState('');
 
   const handleSubmit = () => {
-    onSubmit({ store, delivery, packaging });
+    onSubmit({ delivery, packaging });
   };
 
   if (!show) {
@@ -18,22 +17,12 @@ const StorePopup = ({ show, onClose, onSubmit }) => {
     <div className="popup-overlay">
       <div className="popup-content">
         <button className="close-button" onClick={onClose}>✖</button>
-        <h2>Choose Store and Delivery Options</h2>
-        
-        <div className="popup-section">
-          <label htmlFor="store">Store</label>
-          <select id="store" value={store} onChange={(e) => setStore(e.target.value)}>
-            <option value="">Select Store</option>
-            <option value="store1">Store 1</option>
-            <option value="store2">Store 2</option>
-            <option value="store3">Store 3</option>
-          </select>
-        </div>
+        <h2>Вибирайте упакування та способи доставки</h2>
 
         <div className="popup-section">
-          <label htmlFor="delivery">Delivery</label>
+          <label htmlFor="delivery">Доставка</label>
           <select id="delivery" value={delivery} onChange={(e) => setDelivery(e.target.value)}>
-            <option value="">Select Delivery</option>
+            <option value="">Вибрати доставку</option>
             <option value="pickup">Pickup</option>
             <option value="home">Home Delivery</option>
           </select>

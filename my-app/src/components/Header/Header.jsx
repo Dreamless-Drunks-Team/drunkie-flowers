@@ -3,9 +3,26 @@ import logo from '../../assert/img/flower-logo.png';
 import './Header.scss';
 import { AuthContext } from '../../jwt/AuthContext';
 import { useContext } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import setMeasurement from '../../storage/slice';
 
-function Header() {
-  const { token } = useContext(AuthContext);
+ 
+function Header() { 
+  const { token } = useContext(AuthContext); 
+  
+ 
+  useEffect(() => { 
+      axios 
+              .get("http://localhost:8080/api/measurement/last", { 
+              headers: { 
+                  Authorization: "Bearer ".concat(token), 
+              }, 
+          }) 
+          .then((res) => setMeasurement(res.data)) 
+          .catch((err) => console.error(err)); 
+  }, []); 
+
   return (
       <header className="header">
         <div className="logo-container">
