@@ -5,6 +5,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from notifications.dispatcher import notification_dispatcher
 from notifications.notifiers.log_notifier import LogNotifier
+from notifications.notifiers.gmail_notifier import GmailNotifier
 from observability.loggers.stdout_logger import StdoutLogger
 from orm.db import db
 from populate import populate_db
@@ -51,7 +52,9 @@ log.set_logger(logger)
 
 
 notifier = LogNotifier()
+email_notifier = GmailNotifier()
 notification_dispatcher.register_notifier(notifier)
+notification_dispatcher.register_notifier(email_notifier)
 
 from events.events import (
     on_order_checkout,
