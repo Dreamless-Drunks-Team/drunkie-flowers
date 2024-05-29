@@ -4,8 +4,10 @@ import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from observability.loggers.stdout_logger import StdoutLogger
 from orm.db import db
 from populate import populate_db
+from observability.log import log
 
 app = Flask(__name__)
 CORS(app)
@@ -43,6 +45,8 @@ app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = ["access", "refresh"]
 
 jwt = JWTManager(app)
 
+logger = StdoutLogger()
+log.set_logger(logger)
 
 @jwt.token_in_blocklist_loader
 def user_loader_callback(jwt_headers, jwt_payload):
