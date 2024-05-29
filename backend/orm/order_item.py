@@ -1,7 +1,11 @@
+from dataclasses import dataclass
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from orm.db import db
 
+
+@dataclass(
+)
 class OrderItem(db.Model):
     __tablename__ = "order_item"
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -15,6 +19,6 @@ class OrderItem(db.Model):
     bouquet: Mapped["Bouquet"] = db.relationship()
     event: Mapped["Event"] = db.relationship()
     packaging: Mapped["Decoration"] = db.relationship()
-    order: Mapped["Order"] = db.relationship(back_populates="items")
+    order: Mapped["Order"] = db.relationship()
 
     

@@ -38,8 +38,9 @@ def populate_db():
     )
 
     policy_type_standard = PolicyType(name="Standard", priority=1)
-    policy_type_premium = PolicyType(name="Premium", priority=1)
-    policy_type_extra_service = PolicyType(name="Additional Cost", priority=1)
+    policy_type_premium = PolicyType(name="Premium", priority=4)
+    policy_type_extra_service = PolicyType(name="Additional Cost", priority=2)
+    policy_type_cumulative_price = PolicyType(name="Cumulative Price", priority=3)
 
     card_type_standard = CardType(
         name="Standard",
@@ -131,6 +132,8 @@ def populate_db():
         suitable_events=[event_birthday, event_wedding],
         decorations=[decoration_strip, decoration_transparent_cover],
         delivery_options=[delivery_option_nova_poshta],
+        policy_type=policy_type_cumulative_price,
+        policy_details={"discount_percent": 0.05},
     )
     bouquet_roses_item_1 = BouquetItem(
         quantity=10, flower=flower_rose, bouquet=bouquet_roses
@@ -146,11 +149,27 @@ def populate_db():
         suitable_events=[event_burial],
         decorations=[decoration_strip, decoration_cover],
         delivery_options=[delivery_option_ukr_poshta],
+        policy_type=policy_type_cumulative_price,
+        policy_details={"discount_percent": 0.05},
     )
     bouquet_tulips_item = BouquetItem(
         quantity=10,
         flower=flower_tulip,
         bouquet=bouquet_tulips,
+    )
+
+    order_john = Order(
+        user=user_john,
+        card=card_john,
+        status="CREATED",
+        delivery=delivery_option_nova_poshta,
+    )
+    order_item_john = OrderItem(
+        order=order_john,
+        bouquet=bouquet_roses,
+        price=100.0,
+        event=event_birthday,
+        packaging=decoration_transparent_cover,
     )
 
     # Roles
@@ -165,6 +184,8 @@ def populate_db():
     # Policy types
     session.add(policy_type_standard)
     session.add(policy_type_premium)
+    session.add(policy_type_extra_service)
+    session.add(policy_type_cumulative_price)
 
     # Card types
     session.add(card_type_standard)
@@ -199,6 +220,10 @@ def populate_db():
 
     session.add(bouquet_tulips)
     session.add(bouquet_tulips_item)
+    
+    # Orders
+    session.add(order_john)
+    session.add(order_item_john)
 
     # Commit the transaction
     session.commit()

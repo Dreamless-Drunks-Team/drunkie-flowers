@@ -16,7 +16,7 @@ class Card(db.Model):
     user: Mapped["User"] = db.relationship()
     type: Mapped["CardType"] = db.relationship()
 
-
+@dataclass
 class CardType(PricePolicyEntity):
     __tablename__ = "card_type"
     id: Mapped[int] = mapped_column(ForeignKey("price_policy_entity.id"), primary_key=True)

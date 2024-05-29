@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
+from orm.price_policy_entity import PricePolicyEntity
 from orm.db import db
 
 @dataclass
-class Bouquet(db.Model):
+class Bouquet(PricePolicyEntity):
     __tablename__ = "bouquet"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column()
+    id: Mapped[int] = mapped_column(ForeignKey("price_policy_entity.id"), primary_key=True)
     description: Mapped[str] = mapped_column()
     thumbnail_url: Mapped[str] = mapped_column()
 
@@ -23,14 +23,19 @@ class Bouquet(db.Model):
     flowers: Mapped[list["Flower"]] = db.relationship(
         "Flower", secondary="bouquet_item"
     )
+    
+    __mapper_args__ = {
+        'polymorphic_identity': 'bouquet',
+    }
 
 
+@dataclass
 class BouquetEventAssociation(db.Model):
     __tablename__ = "bouquet_event_association"
     bouquet_id: Mapped[int] = mapped_column(ForeignKey("bouquet.id"), primary_key=True)
     event_id: Mapped[int] = mapped_column(ForeignKey("event.id"), primary_key=True)
 
-
+@dataclass
 class BouquetDecorationAssociation(db.Model):
     __tablename__ = "bouquet_decoration_association"
     bouquet_id: Mapped[int] = mapped_column(ForeignKey("bouquet.id"), primary_key=True)
@@ -39,6 +44,7 @@ class BouquetDecorationAssociation(db.Model):
     )
 
 
+@dataclass
 class BouquetDeliveryOptionAssociation(db.Model):
     __tablename__ = "bouquet_delivery_option_association"
     bouquet_id: Mapped[int] = mapped_column(ForeignKey("bouquet.id"), primary_key=True)

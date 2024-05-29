@@ -1,16 +1,18 @@
+from dataclasses import dataclass
 import enum
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from orm.db import db
 
 
-    
-class OrderStatus(enum.Enum):
+
+class OrderStatus(str, enum.Enum):
     CREATED = "created"
     PAID = "paid"
     DELIVERED = "delivered"
     CANCELED = "canceled"
 
+@dataclass
 class Order(db.Model):
     __tablename__ = "order"
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -23,5 +25,3 @@ class Order(db.Model):
     card: Mapped["Card"] = db.relationship()
 
     delivery: Mapped["DeliveryOption"] = db.relationship()
-    items: Mapped["OrderItem"] = db.relationship(back_populates="order")
-

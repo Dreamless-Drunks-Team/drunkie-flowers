@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from datetime import datetime
-import os
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from observability.loggers.stdout_logger import StdoutLogger

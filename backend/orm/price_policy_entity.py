@@ -25,5 +25,5 @@ class PricePolicyEntity(db.Model):
 class PolicyType(db.Model):
     __tablename__ = "policy_type"
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column()
-    priority: Mapped[int] = mapped_column()
+    name: Mapped[str] = mapped_column(unique=True)
+    priority: Mapped[int] = mapped_column(unique=True)
