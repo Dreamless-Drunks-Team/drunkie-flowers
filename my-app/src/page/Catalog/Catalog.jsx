@@ -36,6 +36,7 @@ const Catalog = ({ bouquetList }) => {
           <input type="number" placeholder="Від" />
           <input type="number" placeholder="До" />
         </div>
+        <button> Застосувати </button>
       </div>
       <div className="bouquet-list">
         {bouquetList.map((bouquet, index) => (
@@ -43,8 +44,6 @@ const Catalog = ({ bouquetList }) => {
             key={index}
             id={bouquet.id}
             image={bouquet.thumbnail_url}
-            name={bouquet.name}
-            price={50} // Повинні бути реальні дані ціни
           />
         ))}
       </div>

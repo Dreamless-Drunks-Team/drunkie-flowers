@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 const RegistrationForm = () => {
     const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
+    const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,15 +21,15 @@ const RegistrationForm = () => {
             return;
         }
 
-        // axios
-        //     .post("http://localhost:8080/api/register", {
-        //         name: name,
-        //         surname: surname,
-        //         email: email,
-        //         password: password,
-        //     })
-        //     .then(() => setRedirectToHome(true))
-        //     .catch((err) => console.error(err));
+        axios
+            .post("http://localhost:5000/user/register", {
+                name: name,
+                phone: phone,
+                email: email,
+                password: password,
+            })
+            .then(() => setRedirectToHome(true))
+            .catch((err) => console.error(err));
     };
 
     if (redirectToHome) {
@@ -51,12 +51,12 @@ const RegistrationForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label className="registration-label">Прізвище</label>
+                    <label className="registration-label">Телефон</label>
                     <input
-                        type="text"
+                        type="phone"
                         className="registration-input"
-                        value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         required
                     />
                 </div>

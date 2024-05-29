@@ -3,18 +3,21 @@ import "./BouquetBuilder.scss"
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../storage/slice';
 import axios from "axios";
+import { Navigate } from 'react-router-dom';
 
 const BouquetBuilder = () => {
   const [flower, setFlower] = useState('')
   const [numberOfFlowers, setNumberOfFlowers] = useState(1);
   const [bouquet, setBouquet] = useState([]);
-  const [inclideTape, setInclideTape] = useState(false)
-  const [colorTape, setColorTape] = useState('#032320')
+  // const [inclideTape, setInclideTape] = useState(false)
+  // const [colorTape, setColorTape] = useState('#032320')
   const [flowers, setFlowers] = useState([]);
+  const [redirectToCart, setRedirectToCart] = useState(false)
+
+  const dispatch = useDispatch()
 
   const handleAddFlower = (e) => {
     setBouquet(prevBouquet => [...prevBouquet, { flower, numberOfFlowers }])
-    console.log(bouquet)
   };
 
   const handleRemoveFlower = (item) => {
@@ -30,16 +33,18 @@ const BouquetBuilder = () => {
     return Date.now() + Math.floor(Math.random() * 1000);
   };
 
-  const dispatch = useDispatch() 
- 
-  useEffect(() => { 
-    axios  
-        .get("http://localhost:5000/bouquets/flowers")  
-        .then((res) => {let flow = res.data.map((item) => item.name); 
-         setFlowers(flow) })  
-        .catch((err) => console.error(err)); 
-  }, []); 
-  
+  useEffect(() => {
+    axios 
+        .get("http://localhost:5000/bouquets/flowers") 
+        .then((res) => {let flow = res.data.map((item) => item.name);
+         setFlowers(flow) }) 
+        .catch((err) => console.error(err));
+  }, []);
+
+  if (redirectToCart) {
+    return <Navigate to="/cart"/>
+  }
+
   return (
     <div className='BouquetBuilder'>
       <h1>Створення власного букету</h1>
@@ -64,17 +69,17 @@ const BouquetBuilder = () => {
         ))}
       </div>
 
-      <h2>Додавання кольорових стрічок</h2>
-      <input type="checkbox" checked={inclideTape} onChange={(e) => { setInclideTape(e.target.checked); console.log(e.target.value) }} />
-      <input type="color" value={colorTape} onChange={(e) => setColorTape(e.target.value)} />
-      <button onClick={() => dispatch(addToCart(
+      {/* <h2>Додавання кольорових стрічок</h2>
+      <input type="checkbox" checked={inclideTape} onChange={(e) => setInclideTape(e.target.checked)} />
+      <input type="color" value={colorTape} onChange={(e) => setColorTape(e.target.value)} /> */}
+      <button onClick={() => {dispatch(addToCart(
           {
             id: generateUniqueId(),
             name: "Custom bouquet",
-            price: 1000,
+            price: 100,
             thumbnail_url: "http://localhost:5000/files/flower/bouquet_21.jpg"
           }
-        ))}>Оформити замовлення</button>
+        )); setRedirectToCart(true)}}>Оформити замовлення</button>
     </div>
   );
 };

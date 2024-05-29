@@ -3,26 +3,10 @@ import logo from '../../assert/img/flower-logo.png';
 import './Header.scss';
 import { AuthContext } from '../../jwt/AuthContext';
 import { useContext } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-import setMeasurement from '../../storage/slice';
 
  
-function Header() { 
-  const { token } = useContext(AuthContext); 
-  
- 
-  useEffect(() => { 
-      axios 
-              .get("http://localhost:8080/api/measurement/last", { 
-              headers: { 
-                  Authorization: "Bearer ".concat(token), 
-              }, 
-          }) 
-          .then((res) => setMeasurement(res.data)) 
-          .catch((err) => console.error(err)); 
-  }, []); 
-
+function Header() {
+  const { token } = useContext(AuthContext);
   return (
       <header className="header">
         <div className="logo-container">
@@ -42,7 +26,6 @@ function Header() {
                 <li><NavLink to="/"> Головна </NavLink></li>
                 <li><NavLink to="/catalog"> Каталог </NavLink></li>
                 <li><NavLink to="/custom_bouquets"> Склади Букет </NavLink></li>
-                <li><NavLink to="/special_offers"> Спецпропозиції </NavLink></li>
                 <li><NavLink to="/cart"> Корзина </NavLink></li>
             </ul>
         </nav>

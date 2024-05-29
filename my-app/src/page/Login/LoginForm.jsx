@@ -11,6 +11,7 @@ const LoginForm = () => {
 
     const { updateToken } = useContext(AuthContext);
     const [redirectToHome, setRedirectToHome] = useState(false);
+    const [redirectToCreateAccount, setRedirectToCreateAccount] = useState(false);
 
     const handleShowPasswordToggle = () => {
         setShowPassword(!showPassword);
@@ -33,6 +34,10 @@ const LoginForm = () => {
 
     if (redirectToHome) {
         return <Navigate to="/" />;
+    }
+
+    if (redirectToCreateAccount) {
+        return <Navigate to="/register" />;
     }
 
     return (
@@ -71,6 +76,9 @@ const LoginForm = () => {
                 <button type="submit" className="login-btn">
                     Увійти
                 </button>
+                <div>
+                    <button className="create-account" onClick={() => setRedirectToCreateAccount(true)}> Створити особистий акаунт </button>    
+                </div>
             </form>
         </div>
     );

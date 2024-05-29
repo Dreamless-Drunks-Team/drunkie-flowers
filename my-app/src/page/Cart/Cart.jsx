@@ -1,4 +1,4 @@
-import {React} from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CartItem from '../../components/CartItem/CartItem';
@@ -12,6 +12,7 @@ function Cart() {
     const goBack = () => {
         navigate(-1);
     };
+
     const totalPrice = () => {
         return cartItems.reduce((total, item) => total += item.price * item.quantity, 0);
     };
@@ -19,7 +20,7 @@ function Cart() {
     return (
         <div className="Cart">
             {cartItems.map((item, index) => (
-                <CartItem on
+                <CartItem
                     key={index}
                     count={item.quantity}
                     id={item.id}

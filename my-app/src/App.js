@@ -10,6 +10,7 @@ import Catalog from "./page/Catalog/Catalog";
 import BouquetBuilder from "./page/BouquetBuilder/BouquetBuilder";
 import axios from "axios";
 import Cart from "./page/Cart/Cart";
+import PrivateRoute from "./jwt/PrivateRoute"
 
 const user = {
   firstName: "Pavlo",
@@ -62,22 +63,22 @@ function App() {
 
   useEffect(() => {
     axios
-        .get("http://localhost:5000/bouquets")
-        .then((res) => {console.log(res.data); setBouquets(res.data) })
-        .catch((err) => console.error(err));
+      .get("http://localhost:5000/bouquets")
+      .then((res) => setBouquets(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home bouquetList={bouquets.slice(0, 5)}/>} />
+        <Route path="/" element={<Home bouquetList={bouquets.slice(0, 5)} />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegistrationForm />} />
-        <Route path="/profile" element={<UserProfile user={user} />} />
-        <Route path="/catalog" element={<Catalog bouquetList={bouquets}/>} />
-        <Route path="/custom_bouquets" element={<BouquetBuilder/>}/>
-        <Route path="/cart" element={<Cart/>}/>
+        <Route path="/profile" element={<PrivateRoute><UserProfile user={user} /></PrivateRoute>} />
+        <Route path="/catalog" element={<Catalog bouquetList={bouquets} />} />
+        <Route path="/custom_bouquets" element={<BouquetBuilder />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
