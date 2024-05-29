@@ -1,4 +1,4 @@
-from backend.orm.user import User
+from orm.user import User
 from notifications.notifiers.notifier import Notifier
 
 
