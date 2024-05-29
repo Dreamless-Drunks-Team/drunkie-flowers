@@ -30,16 +30,16 @@ const BouquetBuilder = () => {
     return Date.now() + Math.floor(Math.random() * 1000);
   };
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    axios 
-        .get("http://localhost:5000/bouquets/flowers") 
-        .then((res) => {console.log(res.data); setFlowers(res.data) }) 
-        .catch((err) => console.error(err));
-  }, []);
-
-
+  const dispatch = useDispatch() 
+ 
+  useEffect(() => { 
+    axios  
+        .get("http://localhost:5000/bouquets/flowers")  
+        .then((res) => {let flow = res.data.map((item) => item.name); 
+         setFlowers(flow) })  
+        .catch((err) => console.error(err)); 
+  }, []); 
+  
   return (
     <div className='BouquetBuilder'>
       <h1>Створення власного букету</h1>
