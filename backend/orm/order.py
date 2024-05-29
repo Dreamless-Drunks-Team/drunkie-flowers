@@ -23,4 +23,5 @@ class Order(db.Model):
     card: Mapped["Card"] = db.relationship()
 
     delivery: Mapped["DeliveryOption"] = db.relationship()
+    items: Mapped["OrderItem"] = db.relationship(back_populates="order")
 

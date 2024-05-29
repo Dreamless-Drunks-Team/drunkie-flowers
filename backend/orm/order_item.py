@@ -15,6 +15,6 @@ class OrderItem(db.Model):
     bouquet: Mapped["Bouquet"] = db.relationship()
     event: Mapped["Event"] = db.relationship()
     packaging: Mapped["Decoration"] = db.relationship()
-    order: Mapped["Order"] = db.relationship()
+    order: Mapped["Order"] = db.relationship(back_populates="items")
 
     
