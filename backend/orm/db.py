@@ -4,7 +4,12 @@ from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):
-    def shallow_serialize(self) -> dict[str, Any]:
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def shallow_serialize(self, exclude_list: list[str] = []) -> dict[str, Any]:
+        return {
+            c.name: getattr(self, c.name)
+            for c in self.__table__.columns
+            if c.name not in exclude_list
+        }
+
 
 db = SQLAlchemy(model_class=Base)

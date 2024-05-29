@@ -2,6 +2,9 @@ from dataclasses import dataclass
 import json
 from typing import List
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import get_jwt_identity, jwt_required
+from auth.manager import TokenPayload
+from orm.user import User
 from orm.decoration import Decoration
 from orm.delivery_option import DeliveryOption
 from orm.flower import Flower
@@ -34,7 +37,14 @@ def get_bouquet_items(id: int):
 
 
 @bouquets.route("/", methods=["POST"])
+@jwt_required()
 def add_item():
+    jwt_payload = TokenPayload(**get_jwt_identity())
+
+    role = User.query.get(jwt_payload.user_id).role
+    if role.name not in ["admin", "merchant"]:
+        return jsonify({"msg": "Unauthorized"}), 401
+
     data = request.json
     bouquet = Bouquet(**data)
     db.session.add(bouquet)
@@ -43,7 +53,14 @@ def add_item():
 
 
 @bouquets.route("/<int:id>", methods=["DELETE"])
+@jwt_required()
 def delete_item(id: int):
+    jwt_payload = TokenPayload(**get_jwt_identity())
+
+    role = User.query.get(jwt_payload.user_id).role
+    if role.name not in ["admin", "merchant"]:
+        return jsonify({"msg": "Unauthorized"}), 401
+
     bouquet = Bouquet.query.get(id)
     db.session.delete(bouquet)
     db.session.commit()
@@ -62,7 +79,8 @@ def get_decorations():
 
 @bouquets.route("/flowers", methods=["GET"])
 def get_flowers():
-    return jsonify([x.shallow_serialize() for x in Flower.query.all()])
+    return jsonify([x.shallow_serialize(["price"]) for x in Flower.query.all()])
+
 
 
 @bouquets.route("/delivery_options", methods=["GET"])
