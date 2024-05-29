@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import LoginForm from "./page/Login/LoginForm";
@@ -6,6 +7,8 @@ import RegistrationForm from "./page/Registration/RegistrationForm";
 import Home from "./page/Home/Home"
 import UserProfile from "./page/UserAccount/UserProfile";
 import Catalog from "./page/Catalog/Catalog";
+import BouquetBuilder from "./page/BouquetBuilder/BouquetBuilder";
+import axios from "axios";
 import Cart from "./page/Cart/Cart";
 
 const user = {
@@ -54,19 +57,26 @@ const user = {
   ],
 }
 
-const images = require.context('./assert/flower/', true);
-const bouquetList = images.keys().map(image => images(image));
-
 function App() {
+  const [bouquets, setBouquets] = useState([])
+
+  useEffect(() => {
+    axios
+        .get("http://localhost:5000/bouquets/")
+        .then((res) => {console.log(res.data); setBouquets(res.data) })
+        .catch((err) => console.error(err));
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home bouquetList={bouquetList.slice(0, 5)}/>} />
+        <Route path="/" element={<Home bouquetList={bouquets.slice(0, 5)}/>} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/profile" element={<UserProfile user={user} />} />
-        <Route path="/catalog" element={<Catalog bouquetList={bouquetList}/>} />
+        <Route path="/catalog" element={<Catalog bouquetList={bouquets}/>} />
+        <Route path="/custom_bouquest" element={<BouquetBuilder/>}/>
         <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
