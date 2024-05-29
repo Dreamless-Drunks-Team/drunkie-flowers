@@ -24,7 +24,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-up">
         <div className="firstTitle">
-          {["Company", "Our Team", "Prices", "Terms"].map((title) => <p>{title}</p>)}
+          {["Company", "Our Team", "Prices", "Terms"].map((title, index) => <p key={index}>{title}</p>)}
         </div>
         <SocialMediaSection />
       </div>

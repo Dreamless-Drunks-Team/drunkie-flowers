@@ -41,6 +41,7 @@ const Catalog = ({ bouquetList }) => {
         {bouquetList.map((bouquet, index) => (
           <BouquetItem
             key={index}
+            id={bouquet.id}
             image={bouquet.thumbnail_url}
             name={bouquet.name}
             price={50} // Повинні бути реальні дані ціни

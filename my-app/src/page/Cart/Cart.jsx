@@ -19,11 +19,12 @@ function Cart() {
 
     return (
         <div className="Cart">
-            {cartItems.map((item) => (
+            {cartItems.map((item, index) => (
                 <CartItem
-                    key={item.id}
+                    key={index}
                     count={item.quantity}
                     id={item.id}
+                    image={item.thumbnail_url}
                     price={item.price}
                     name={item.name} />
             ))}
