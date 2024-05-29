@@ -6,6 +6,7 @@ import RegistrationForm from "./page/Registration/RegistrationForm";
 import Home from "./page/Home/Home"
 import UserProfile from "./page/UserAccount/UserProfile";
 import Catalog from "./page/Catalog/Catalog";
+import Cart from "./page/Cart/Cart";
 
 const user = {
   firstName: "Pavlo",
@@ -66,6 +67,7 @@ function App() {
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/profile" element={<UserProfile user={user} />} />
         <Route path="/catalog" element={<Catalog bouquetList={bouquetList}/>} />
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>
