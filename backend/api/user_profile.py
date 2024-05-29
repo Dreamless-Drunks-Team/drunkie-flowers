@@ -6,6 +6,7 @@ from orm.db import db
 from typing import List
 from flask import Blueprint, jsonify, request
 from auth.manager import TokenPayload, auth
+from events.events import on_login, on_account_change
 
 from flask_jwt_extended import (
     jwt_required,
@@ -40,6 +41,8 @@ def update_user_profile():
 
     query.update(request.json)
     db.session.commit()
+    
+    on_account_change.notify(user)
     return jsonify(User.query.get(id))
 
 
@@ -79,6 +82,8 @@ def login():
         "access_token": create_access_token(auth.issue_token(user).to_dict()),
         "refresh_token": create_refresh_token(auth.issue_token(user).to_dict()),
     }
+    
+    on_login.notify(user)
     return jsonify(ret), 200
 
 
@@ -89,6 +94,7 @@ def refresh():
     ret = {
         "access_token": create_access_token(current_token),
     }
+    
     return jsonify(ret), 200
 
 

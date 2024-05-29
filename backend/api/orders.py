@@ -9,6 +9,7 @@ from orm.user import User
 from orm.db import db
 from auth.manager import TokenPayload
 from orm.order import Order, OrderStatus
+from events.events import on_order_checkout, on_order_item_added
 
 
 orders = Blueprint("orders", __name__)
@@ -68,6 +69,7 @@ def add_order_item(id: int):
     db.session.add(order_item)
     db.session.commit()
 
+    on_order_item_added.notify(order_item)
     return {"msg": f"Item {order_item.id} added to order successfully"}, 201
 
 
@@ -164,5 +166,6 @@ def get_order_price(id: int):
     total = current_price
 
     prices.append({"total": total})
-
+    
+    on_order_checkout.notify(order)
     return jsonify(prices)

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod, property
+from abc import ABC, abstractmethod
 from typing import Callable, Generic, TypeVar
 
 from typing_extensions import TypeVarTuple, Unpack
