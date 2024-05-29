@@ -56,9 +56,6 @@ const user = {
   ],
 }
 
-const images = require.context('./assert/flower/', true);
-const bouquetList = images.keys().map(image => images(image));
-
 function App() {
   const [bouquets, setBouquets] = useState([])
 

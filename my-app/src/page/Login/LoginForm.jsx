@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-// import { AuthContext } from "./../../jwt/AuthContext.jsx";
+import { AuthContext } from "./../../jwt/AuthContext.jsx";
 import "./LoginForm.scss";
 import { Navigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    // const { updateToken } = useContext(AuthContext);
+    const { updateToken } = useContext(AuthContext);
     const [redirectToHome, setRedirectToHome] = useState(false);
 
     const handleShowPasswordToggle = () => {
@@ -19,17 +19,17 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // axios
-        //     .post("http://localhost:8080/api/login", {
-        //         email: email,
-        //         password: password,
-        //     })
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         updateToken(res.data.token);
-        //         setRedirectToHome(true);
-        //     })
-        //     .catch((err) => console.error(err));
+        axios
+            .post("http://localhost:5000/login", {
+                email: email,
+                password: password,
+            })
+            .then((res) => {
+                console.log(res.data);
+                updateToken(res.data.token);
+                setRedirectToHome(true);
+            })
+            .catch((err) => console.error(err));
     };
 
     if (redirectToHome) {
