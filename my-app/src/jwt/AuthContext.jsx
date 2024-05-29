@@ -4,7 +4,6 @@ const AuthContext = createContext("");
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState('');
-  const [login, setLogin] = useState('');
 
   const updateToken = (newToken) => {
     setToken(newToken);

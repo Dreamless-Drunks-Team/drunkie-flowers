@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import logo from '../../assert/img/flower-logo.png';
 import './Header.scss';
-import * as React from "react";
+import { AuthContext } from '../../jwt/AuthContext';
+import { useContext } from 'react';
 
 function Header() {
+  const { token } = useContext(AuthContext);
   return (
       <header className="header">
         <div className="logo-container">
@@ -27,7 +29,8 @@ function Header() {
                 <li><NavLink to="/cart"> Корзина </NavLink></li>
             </ul>
         </nav>
-        <NavLink className="login-button" to="/login"> Увійти </NavLink>
+        {!token && <NavLink className="login-button" to="/login"> Увійти </NavLink> }
+        {token && <NavLink className="login-button" to="/profile"> Профіль </NavLink> }
       </header>
   );
 }
