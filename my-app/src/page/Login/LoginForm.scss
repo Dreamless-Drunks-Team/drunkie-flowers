@@ -1,0 +1,99 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-top: 20px; // Додали відступ зверху
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+  
+      .label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+  
+      .input-field {
+        width: 300px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #cccccc;
+        font-size: 14px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Додали тінь
+      }
+  
+      .password-input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; // Розміщуємо елементи по краях
+  
+        .input-field {
+          width: 200px; // Зменшуємо ширину поля вводу
+          margin-right: 10px; // Додали відступ зправа
+        }
+  
+        .show-password-btn {
+          background-color: transparent; // Зробили фон прозорим
+          border: none; // Видалили границю
+          color: #3f51b5; // Змінили колір тексту
+          font-size: 14px;
+          cursor: pointer;
+          transition: color 0.3s;
+  
+          &:hover {
+            color: #2c3e99; // Зміна кольору при наведенні
+          }
+        }
+      }
+    }
+  
+    .login-btn {
+      background-color: #e2a548;
+      color: #ffffff;
+      padding: 12px 30px; // Збільшили висоту та ширину кнопки
+      border-radius: 4px;
+      border: none;
+      font-size: 18px; // Збільшили розмір шрифту
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: rgb(229, 200, 12);
+      }
+    }
+  }
+  
+  .login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-top: -100px;
+  
+    h1 {
+    color: #032131;
+  }
+}
+
+.create-account {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 2vh 0vh -3vh 0vh;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
